@@ -10,7 +10,7 @@ Let's define a graphql mutation to perform insert into todos.
 
 ```graphql
 mutation ($todo: String!, $isPublic: Boolean!) {
-  insert_todos(objects: {title: $todo, is_public: $isPublic}) {
+  insert_todos(objects: {title: $todo, is_public: $isPublic, user_id: "<auth0-user-id>"}) {
     affected_rows
     returning {
       id
@@ -22,7 +22,8 @@ mutation ($todo: String!, $isPublic: Boolean!) {
 }
 ```
 
-You will also need to pass in the values for the variables.
+
+You will also need to pass in the values for the variables, including <auth0-user-id> which can be found in the `users` table of your Hasura instance (https://<your-hasura-app-url>/console/data/schema/public/tables/users/browse)
 
 Try this mutation in GraphiQL against the application database to see what the response looks like.
 
